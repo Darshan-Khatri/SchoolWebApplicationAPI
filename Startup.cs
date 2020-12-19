@@ -6,7 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using StudentSystem.Core;
 using StudentSystem.Models;
+using StudentSystem.Persistance;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +38,9 @@ namespace StudentSystem
           {
               options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
           }); ;
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
