@@ -9,11 +9,13 @@ namespace StudentSystem.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SchoolController : Controller
+    public class SchoolController : ControllerBase
     {
+        [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            var v = "Working Student controller!.";
+            return Ok(v);
         }
     }
 }
