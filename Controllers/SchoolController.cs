@@ -29,7 +29,8 @@ namespace StudentSystem.Controllers
         [HttpGet("AllSchool")]
         public async Task<IActionResult> GetAllSchool()
         {
-           
+            var query = await uow.SchoolRepository.GetAll();
+            return Ok(query);
             throw new NotImplementedException();
         }
     }
