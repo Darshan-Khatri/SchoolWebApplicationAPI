@@ -31,7 +31,6 @@ namespace StudentSystem.Controllers
         {
             var query = await uow.SchoolRepository.GetAll();
             return Ok(query);
-            throw new NotImplementedException();
         }
     }
 }

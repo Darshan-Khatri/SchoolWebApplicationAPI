@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace StudentSystem.Core.IRepositories
 {
     //Add ICommonRepository Interface that will gives you access to all common method that you would need.
-    public interface ISchoolRepository : ICommonRepository<Student>
+    public interface ISchoolRepository : ICommonRepository<School>
     {
         Task<Student> SchoolFilter();
     }

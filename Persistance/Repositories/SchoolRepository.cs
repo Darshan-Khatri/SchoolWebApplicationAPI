@@ -24,23 +24,7 @@ namespace StudentSystem.Persistance.Repositories
             get { return Context as StudentDBContext; }
         }
 
-        public void AddRecord(Student NewRecord)
-        {
-            throw new NotImplementedException();
-        }
-
         public Task<Student> SchoolFilter()
-        {
-
-            throw new NotImplementedException();
-        }
-
-        Task<IEnumerable<Student>> ICommonRepository<Student>.GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<Student> ICommonRepository<Student>.GetSingleRecord(int Id)
         {
             throw new NotImplementedException();
         }
