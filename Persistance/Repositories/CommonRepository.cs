@@ -13,32 +13,42 @@ namespace StudentSystem.Persistance.Repositories
     {
         //Make this PROTECTD without fail. Since this fields would be inherited by child class
         protected readonly DbContext Context;
-        //protected readonly DbSet<TEntity> entity;
+        protected readonly DbSet<TEntity> entity;
 
         public CommonRepository(DbContext context)
         {
             this.Context = context;
-            //entity = this.Context.Set<TEntity>();
+            entity = this.Context.Set<TEntity>();
         }
-        public void AddRecord(TEntity NewRecord)
+        public async void AddRecord(TEntity NewRecord)
         {
-            throw new NotImplementedException();
+            var query = await entity.AddAsync(NewRecord);
         }
 
-        public void DeleteRecord(int Id)
+        public bool DeleteRecord(string Id)
         {
-            throw new NotImplementedException();
+            //Don't include unnecessay async and await. If you include FindAsync overher then it can create issue.
+            //Since before finding id it will return false if you include async.
+            var query = entity.Find(Id);
+            if (query != null)
+            {
+                entity.Remove(query);
+                return true;
+            }
+            else { return false; }
+
         }
 
         public async Task<IEnumerable<TEntity>> GetAll()
         {
-            var query = await Context.Set<TEntity>().ToListAsync();
+            var query = await entity.ToListAsync();
             return query;
         }
 
-        public Task<TEntity> GetSingleRecord(int Id)
+        public async Task<TEntity> GetSingleRecord(string Id)
         {
-            throw new NotImplementedException();
+            var query = await entity.FindAsync(Id);
+            return query;
         }
     }
 }

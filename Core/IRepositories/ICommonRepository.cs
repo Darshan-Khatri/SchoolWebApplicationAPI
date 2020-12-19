@@ -9,11 +9,11 @@ namespace StudentSystem.Core.IRepositories
     {
         Task<IEnumerable<TEntity>> GetAll();
 
-        Task<TEntity> GetSingleRecord(int Id);
+        Task<TEntity> GetSingleRecord(string Id);
 
         void AddRecord(TEntity NewRecord);
 
-        void DeleteRecord(int Id);
+        bool DeleteRecord(string Id);
 
     }
 }
