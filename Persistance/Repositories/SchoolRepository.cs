@@ -1,4 +1,5 @@
-﻿using StudentSystem.Core.IRepositories;
+﻿using Microsoft.EntityFrameworkCore;
+using StudentSystem.Core.IRepositories;
 using StudentSystem.Models;
 using System;
 using System.Collections.Generic;
@@ -7,30 +8,25 @@ using System.Threading.Tasks;
 
 namespace StudentSystem.Persistance.Repositories
 {
-    public class SchoolRepository : ISchoolRepository, ICommonRepository<School>
+    //Inherit CommonRepository CLASS not ICommonRepository INTERFACE
+    public class SchoolRepository : CommonRepository<School>, ISchoolRepository
     {
-        public void AddRecord(School NewRecord)
+
+        public SchoolRepository(StudentDBContext context) : base(context)
         {
-            throw new NotImplementedException();
+            
         }
 
-        public void DeleteRecord(int Id)
+        //Use this property to use CommonRepositoy methods.
+        //You must make CommonRepositoy fileds PROTECTED because you are inheriting from from parent calls(CommonRepositoy)
+        public StudentDBContext StudentDBContext
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<School>> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<School> GetSingleRecord(int Id)
-        {
-            throw new NotImplementedException();
+            get { return Context as StudentDBContext; }
         }
 
         public Task<Student> SchoolFilter()
         {
+
             throw new NotImplementedException();
         }
     }

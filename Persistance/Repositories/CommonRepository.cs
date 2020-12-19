@@ -1,4 +1,5 @@
-﻿using StudentSystem.Core.IRepositories;
+﻿using Microsoft.EntityFrameworkCore;
+using StudentSystem.Core.IRepositories;
 using StudentSystem.Models;
 using System;
 using System.Collections.Generic;
@@ -10,11 +11,14 @@ namespace StudentSystem.Persistance.Repositories
     // public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     public class CommonRepository<TEntity> : ICommonRepository<TEntity> where TEntity : class
     {
-        private readonly StudentDBContext context;
+        //Make this PROTECTD without fail. Since this fields would be inherited by child class
+        protected readonly DbContext Context;
+        //protected readonly DbSet<TEntity> entity;
 
-        public CommonRepository(StudentDBContext context)
+        public CommonRepository(DbContext context)
         {
-            this.context = context;
+            this.Context = context;
+            //entity = this.Context.Set<TEntity>();
         }
         public void AddRecord(TEntity NewRecord)
         {
@@ -26,9 +30,10 @@ namespace StudentSystem.Persistance.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<TEntity>> GetAll()
+        public async Task<IEnumerable<TEntity>> GetAll()
         {
-            throw new NotImplementedException();
+            var query = await Context.Set<TEntity>().ToListAsync();
+            return query;
         }
 
         public Task<TEntity> GetSingleRecord(int Id)

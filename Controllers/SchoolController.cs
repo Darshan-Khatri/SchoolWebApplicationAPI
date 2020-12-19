@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using StudentSystem.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +12,25 @@ namespace StudentSystem.Controllers
     [ApiController]
     public class SchoolController : ControllerBase
     {
+        private readonly IUnitOfWork uow;
+
+        public SchoolController(IUnitOfWork uow)
+        {
+            this.uow = uow;
+        }
+
         [HttpGet]
         public IActionResult Index()
         {
             var v = "Working Student controller!.";
             return Ok(v);
+        }
+
+        [HttpGet("AllSchool")]
+        public async Task<IActionResult> GetAllSchool()
+        {
+           
+            throw new NotImplementedException();
         }
     }
 }
