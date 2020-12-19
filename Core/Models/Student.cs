@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace StudentSystem.Models
 {
@@ -12,7 +13,9 @@ namespace StudentSystem.Models
 
         public string StdCode { get; set; }
         public string StdFname { get; set; }
+        public string StdMname { get; set; }
         public string StdLname { get; set; }
+        [Required]
         public string StdGend { get; set; }
         public string MajCode { get; set; }
         public DateTime? StdDob { get; set; }

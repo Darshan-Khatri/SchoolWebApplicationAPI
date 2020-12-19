@@ -5,6 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using StudentSystem.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +19,11 @@ namespace StudentSystem
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+            using (var client = new StudentDBContext())
+            {
+                client.Database.EnsureCreated();
+            }
         }
 
         public IConfiguration Configuration { get; }
@@ -24,7 +31,11 @@ namespace StudentSystem
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(
+          options =>
+          {
+              options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+          }); ;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
