@@ -38,7 +38,9 @@ namespace StudentSystem.Controllers
         public async Task<IActionResult> GetSchool(string Id)
         {
             var query = await _unitOfWork.SchoolRepository.GetSingleRecord(Id);
+            if(query != null)
             return Ok(query);
+            return BadRequest();
         }
 
         [HttpPost]

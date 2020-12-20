@@ -37,8 +37,8 @@ namespace StudentSystem
                             options =>
                             {
                                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-                            }); 
-
+                            });
+            services.AddCors();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         }

@@ -27,7 +27,7 @@ namespace StudentSystem.Persistance.Repositories
 
         public bool DeleteRecord(string Id)
         {
-            //Don't include unnecessay async and await. If you include FindAsync overher then it can create issue.
+            //Don't include unnecessay async and await. If you include FindAsync overhere then it can create issue.
             //Since before finding id it will return false if you include async.
             var query = entity.Find(Id);
             if (query != null)
