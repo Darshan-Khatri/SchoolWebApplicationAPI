@@ -38,7 +38,7 @@ namespace StudentSystem
                             {
                                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                             });
-            services.AddCors();
+            services.AddCors(c => { c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin()); });
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         }
@@ -52,6 +52,8 @@ namespace StudentSystem
             }
 
             app.UseRouting();
+
+            app.UseCors(options => options.AllowAnyOrigin());
 
             app.UseAuthorization();
 
