@@ -38,8 +38,8 @@ namespace StudentSystem.Controllers
         public async Task<IActionResult> GetSchool(string Id)
         {
             var query = await _unitOfWork.SchoolRepository.GetSingleRecord(Id);
-            if(query != null)
-            return Ok(query);
+            if (query != null)
+                return Ok(query);
             return BadRequest();
         }
 
@@ -61,6 +61,21 @@ namespace StudentSystem.Controllers
                 return Ok(Id);
             }
             return BadRequest();
+        }
+
+        [HttpPut("{Id}")]
+        public async Task<IActionResult> UpdateSchool(string Id, School school)
+        {
+            var querySchoolObj = _unitOfWork.SchoolRepository.GetSingleRecord(Id);
+            
+            querySchoolObj.Result.SchCode = school.SchCode;
+            querySchoolObj.Result.SchName = school.SchName;
+            querySchoolObj.Result.SchDeanName = school.SchDeanName;
+            querySchoolObj.Result.SchPhone = school.SchPhone;
+
+
+            await _unitOfWork.SaveAsync();
+            return Ok(querySchoolObj.Status);
         }
     }
 }
