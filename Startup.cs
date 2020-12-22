@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using StudentSystem.Core;
+using StudentSystem.HelperDtos;
 using StudentSystem.Models;
 using StudentSystem.Persistance;
 using System;
@@ -39,6 +41,9 @@ namespace StudentSystem
                                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                             });
             services.AddCors(c => { c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin()); });
+
+            services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
+
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         }
