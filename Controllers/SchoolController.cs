@@ -67,7 +67,7 @@ namespace StudentSystem.Controllers
         public async Task<IActionResult> UpdateSchool(string Id, School school)
         {
             var querySchoolObj = _unitOfWork.SchoolRepository.GetSingleRecord(Id);
-            
+
             querySchoolObj.Result.SchCode = school.SchCode;
             querySchoolObj.Result.SchName = school.SchName;
             querySchoolObj.Result.SchDeanName = school.SchDeanName;
@@ -75,7 +75,7 @@ namespace StudentSystem.Controllers
 
 
             await _unitOfWork.SaveAsync();
-            return Ok(querySchoolObj.Status);
+            return Ok(querySchoolObj.Result);
         }
     }
 }
