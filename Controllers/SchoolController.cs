@@ -73,7 +73,7 @@ namespace StudentSystem.Controllers
         }
 
         [HttpPut("{Id}")]
-        public async Task<IActionResult> UpdateSchool(string Id, School school)
+        public async Task<IActionResult> UpdateSchool(string Id, SchoolDto school)
         {
             var querySchoolObj = _unitOfWork.SchoolRepository.GetSingleRecord(Id);
 
