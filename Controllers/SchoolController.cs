@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using StudentSystem.Core;
+using StudentSystem.Dtos;
 using StudentSystem.Models;
 using System;
 using System.Collections.Generic;
@@ -14,10 +16,12 @@ namespace StudentSystem.Controllers
     public class SchoolController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper mapper;
 
-        public SchoolController(IUnitOfWork uow)
+        public SchoolController(IUnitOfWork uow, IMapper mapper)
         {
             this._unitOfWork = uow;
+            this.mapper = mapper;
         }
 
         [HttpGet]
@@ -31,7 +35,8 @@ namespace StudentSystem.Controllers
         public async Task<IActionResult> GetAllSchool()
         {
             var query = await _unitOfWork.SchoolRepository.GetAll();
-            return Ok(query);
+            var Dto = mapper.Map<IEnumerable<SchoolDto>>(query);
+            return Ok(Dto);
         }
 
         [HttpGet("GetSchool/{Id}")]
@@ -39,7 +44,10 @@ namespace StudentSystem.Controllers
         {
             var query = await _unitOfWork.SchoolRepository.GetSingleRecord(Id);
             if (query != null)
-                return Ok(query);
+            {
+                var Dto = mapper.Map<School, SchoolDto>(query);
+                return Ok(Dto);
+            }
             return BadRequest();
         }
 
