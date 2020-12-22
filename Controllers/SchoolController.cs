@@ -52,9 +52,10 @@ namespace StudentSystem.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddNewSchool(School body)
+        public async Task<IActionResult> AddNewSchool(SchoolDto body)
         {
-            _unitOfWork.SchoolRepository.AddRecord(body);
+            var dto = mapper.Map<SchoolDto, School>(body);
+            _unitOfWork.SchoolRepository.AddRecord(dto);
             await _unitOfWork.SaveAsync();
             return Ok();
         }
