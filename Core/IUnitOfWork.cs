@@ -8,8 +8,9 @@ namespace StudentSystem.Core
 {
     public interface IUnitOfWork
     {
-        //Write property of all repository which you gonna use.
+        //Write property of all repositories which you gonna use.
         ISchoolRepository SchoolRepository { get; }
+        IAdvisorRepository AdvisorRepository { get; }
         Task<bool> SaveAsync();
     }
 }

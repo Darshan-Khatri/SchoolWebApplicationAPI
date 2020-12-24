@@ -23,6 +23,9 @@ namespace StudentSystem.Persistance
 
         //You must write signature of this property in IUnitOfWork Interface.
         public ISchoolRepository SchoolRepository => new SchoolRepository(_context);
+
+        public IAdvisorRepository AdvisorRepository => new AdvisorRepository(_context);
+
         //public ISchoolRepository SchoolRepository { get; private set; }
 
         public async Task<bool> SaveAsync()

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StudentSystem.Core.IRepositories;
+using StudentSystem.Core.Models;
 using StudentSystem.Models;
 using System;
 using System.Collections.Generic;

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using StudentSystem.Core;
+using StudentSystem.Core.Models;
 using StudentSystem.Dtos;
 using StudentSystem.Models;
 using System;
@@ -34,8 +35,22 @@ namespace StudentSystem.Controllers
         [HttpGet("AllSchool")]
         public async Task<IActionResult> GetAllSchool()
         {
+
+            //if (FilterValue != null)
+            //{
+            //    var query = await _unitOfWork.SchoolRepository.SchoolFilter(FilterValue);
+            //    var Dto = mapper.Map<IEnumerable<SchoolDto>>(query);
+            //    return Ok(Dto);
+            //    //query = query.Where(s => s.SchCode == FilterValue.schCode);
+            //}
+            //else
+            //{
+            //    var query = await _unitOfWork.SchoolRepository.GetAll();
+            //    var Dto = mapper.Map<IEnumerable<SchoolDto>>(query).ToList();
+            //    return Ok(Dto);
+            //}
             var query = await _unitOfWork.SchoolRepository.GetAll();
-            var Dto = mapper.Map<IEnumerable<SchoolDto>>(query);
+            var Dto = mapper.Map<IEnumerable<SchoolDto>>(query).ToList();
             return Ok(Dto);
         }
 
@@ -87,5 +102,13 @@ namespace StudentSystem.Controllers
             await _unitOfWork.SaveAsync();
             return Ok(querySchoolObj.Result);
         }
+
+        //[HttpGet("filter")]
+        //public async Task<IActionResult> filteredList()
+        //{
+        //    var list = new List<string> { };
+        //    var query = await _unitOfWork.SchoolRepository.SchoolFilter(list);
+        //    return Ok(query);
+        //}
     }
 }
